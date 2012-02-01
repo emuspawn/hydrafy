@@ -1,0 +1,1283 @@
+2wire		Wireless
+3com	debug	synnet
+3com	tech	tech
+3com	adm	
+3com	debug	synnet
+3com	tech	tech
+3com	tech	tech
+3com		ILMI
+3com	admin	
+3com		PASSWORD
+3com	debug	synnet
+3com	tech	tech
+3com	adminttd	adminttd
+3com	admin	comcomcom
+3com	tech	tech
+3com	admin	admin
+3com	operator	
+3com	adm	
+3com	security	security
+3com	3comcso	RIP000
+3com	tech	
+3com	admin	synnet
+3com		admin
+3com	tech	tech
+3com	root	
+3com	admin	
+3com	tech	
+3com	admin	admin
+3com	tech	tech
+3com	admin	
+3com	admin	admin
+3com	admin	
+3com	monitor	monitor
+3com	manager	manager
+3com	root	
+3com	admin	
+3com	operator	
+3com	admin	
+3com	admin	admin
+3com	admin	
+3com		
+3com	Administrator	
+3com	admin	admin
+3com	recovery	recovery
+3com		admin
+3com	Root	
+3com	admin	
+3com	admin	
+3com	admin	
+3com	admin	
+3com		
+3com	admin	admin
+3com	admin	
+3com	Administrator	
+3com	tech	
+3com	admin	admin
+3com	recovery	recovery
+3com		admin
+3com		1234admin
+3com	Type User: FORCE	
+3com		
+3com	admin	password
+3com		
+3com		PASSWORD
+3com	Administrator	admin
+3com		admin
+3com		
+3com	admin	
+3com	admin	
+3com		admin
+3com	User	Password
+3com		admin
+3com	admin	1234admin
+3com	Administrator	admin
+3com	defug	synnet
+3m	volition	volition
+3ware	Administrator	3ware
+accelerated-networks	sysadm	anicust
+accton		0
+accton-t-online		0
+accton-t-online		0
+aceex	admin	
+aceex	admin	
+actiontec	admin	password
+adc-kentrox		secret
+addon	admin	admin
+adic	admin	secure
+adic	admin	password
+adtran		adtran
+adtran		
+adtran		Password
+adtran		PASSWORD
+adtran		adtran
+adtran		
+adtran		adtran
+adtran		ADTRAN
+adtran		
+adtran		adtran
+advantek-networks	admin	
+aethra	admin	password
+airties-rt-210	admin	admin
+alcatel	kermit	kermit
+alcatel	dhs3mt	dhs3mt
+alcatel	at4400	at4400
+alcatel	mtch	mtch
+alcatel	mtcl	mtcl
+alcatel	root	letacla
+alcatel	dhs3pms	dhs3pms
+alcatel	adfexc	adfexc
+alcatel	client	client
+alcatel	install	llatsni
+alcatel	halt	tlah
+alcatel		1064
+alcatel	admin	switch
+alcatel	diag	switch
+alcatel	diag	switch
+alcatel	root	permit
+alcatel		admin
+alcatel	ftp_inst	pbxk1064
+alcatel	ftp_admi	kilo1987
+alcatel	ftp_oper	help1954
+alcatel	ftp_nmc	tuxalize
+alcatel	mtcl	
+alcatel	SUPERUSER	ANS#150
+allied	manager	friend
+allied-telesyn		admin
+allied-telesyn	manager	admin
+allied-telesyn	root	
+allied-telesyn	manager	manager
+allied-telesyn	manager	friend
+allied-telesyn	Manager	friend
+allnet	admin	admin
+allnet		admin
+allnet	admin	password
+alteon	admin	
+alteon	admin	admin
+alteon	admin	
+alteon	admin	linga
+alteon	admin	admin
+ambit	root	
+ambit	root	root
+ambit	root	root
+ambit	root	root
+amitech	admin	admin
+andover-controls	acc	acc
+aoc		admin
+apache	admin	
+apc		backdoor
+apc		TENmanUFactOryPOWER 
+apc	apc	apc
+apc	device	device
+apc	apc	apc
+apple		public
+apple		password
+apple		admin
+apple	root	admin
+applied-innovations	scout	scout
+areca	admin	0
+areca	admin	0
+arescom		atc123
+artem		admin
+asante	IntraSwitch	Asante
+asante	IntraStack	Asante
+asante	superuser	
+asante	admin	asante
+ascend	readonly	lucenttech2
+ascend		ascend
+ascend	root	ascend
+ascom		3ascotel
+asmack	admin	epicrouter
+asmax	admin	epicrouter
+asmax	admin	epicrouter
+asmax	admin	epicrouter
+asmax	admin	epicrouter
+aspect	customer	
+aspect	DTA	TJM
+aspect	DTA	TJM
+aspect	DTA	TJM
+asus	admin	admin
+asus	admin	admin
+asus	admin	admin
+asus	admin	admin
+asus	admin	admin
+asus	admin	admin
+asus		admin
+asus	admin	admin
+asus	admin	admin
+atl	operator	1234
+atl	Service	5678
+atlantis	admin	atlantis
+atlantis	admin	atlantis
+avaya	root	ROOT500
+avaya	craft	
+avaya	root	root
+avaya	diag	danger
+avaya	manuf	xxyyzz
+avaya	diag	danger
+avaya	manuf	xxyyzz
+avaya		admin
+avaya	craft	crftpw
+avaya	root	cms500
+avaya	dadmin	dadmin01
+avaya	Administrator	ggdaseuaimhrke
+avaya	root	ggdaseuaimhrke
+avm		0
+avm		
+avocent	root	tslinux
+axis	root	pass
+axis	root	pass
+axis	root	pass
+axis	root	pass
+axis		
+axis	root	pass
+axus		0
+aztech	admin	admin
+aztecj	root	admin
+aztecj	isp	isp
+bausch-datacom	admin	epicrouter
+bay-networks		NetICs
+bay-networks	security	security
+bay-networks	User	
+bay-networks	Manager	
+bay-networks	User	
+bay-networks	security	security
+bay-networks		NetICs
+bbr-4mg-and-bbr-4hg	root	
+beetel	admin	password
+belkin		MiniAP
+belkin		admin
+benq	admin	admin
+billion	admin	admin
+billion		
+bintec	admin	bintec
+bintec		snmp-Trap
+bintec	admin	bintec
+bintec	admin	bintec
+bintec	admin	bintec
+blue-coat-systems	admin	articon
+bluecoat	admin	admin
+bmc	patrol	patrol
+bmc-software	Administrator	the same all over
+bosch	user	user
+bosch	live	live
+bosch-	service	service
+breezecom		Master
+breezecom		laflaf
+breezecom		Helpdesk
+breezecom		Super
+breezecom		Master
+breezecom		laflaf
+broadlogic	webadmin	webadmin
+broadlogic	admin	admin
+broadlogic	installer	installer
+brocade	root	fivranne
+brocade	admin	password
+brocade	admin	password
+brocade	user	password
+brother		access
+brother		access
+brother		access
+brother		access
+brother		access
+brother	admin	access
+brother	admin	access
+buffalo	root	
+buffalo	root	
+buffalo	root	
+buffalo-technology	admin	password
+cable-and-wireless	admin	1234
+cabletron	netman	
+canyon	Administrator	admin
+cayman		
+celerity	mediator	mediator
+celerity	root	Mau'dib
+cellit	cellit	cellit
+checkpoint	admin	admin
+ciphertrust	admin	password
+cisco	admin	diamond
+cisco	cmaker	cmaker
+cisco	admin	admin
+cisco	admin	changeme
+cisco	netrangr	attack
+cisco	bbsd-client	changeme2
+cisco	bbsd-client	NULL
+cisco	Administrator	changeme
+cisco	root	attack
+cisco	sa	
+cisco		public/private/secret
+cisco		cisco
+cisco	admin	admin
+cisco	admin	default
+cisco	Administrator	admin
+cisco	Cisco	Cisco
+cisco	admin	admin
+cisco	guest	
+cisco	admin	cisco
+cisco	cmaker	cmaker
+cisco		Cisco
+cisco	Administrator	admin
+cisco		_Cisco
+cisco	Cisco	Cisco
+cisco	root	blender
+cisco	hsa	hsadb
+cisco	root	blender
+cisco	wlse	wlsedb
+cisco	root	Cisco
+cisco	admin	admin
+cisco	wlseuser	wlsepassword
+cisco	enable	
+cisco	root	password
+cisco	CISCO15	otbu+1
+cisco	cisco	
+cisco	enable	
+cisco-arrowpoint	admin	system
+citel	citel	password
+citel		citel
+cnet	admin	epicrouter
+cnet	admin	1234
+cnet	Admin	admin
+colubris	admin	admin
+com3	admin	admin
+comcast	comcast	
+compaq	administrator	administrator
+compaq	anonymous	
+compaq	user	user
+compaq	operator	operator
+compaq	user	public
+compaq	PFCUser	240653C9467E45
+comtrend	admin	
+comtrend	admin	admin
+comtrend	admin	1234
+conceptronic	admin	1234
+conexant	Administrator	admin
+conexant		epicrouter
+conexant		admin
+corecess	Administrator	admin
+corecess	corecess	corecess
+corecess	admin	
+creative		
+crossbeam		x40rocks
+ctc-union	root	root
+cuproplus		
+cyberguard	cgadmin	cgadmin
+cyclades	super	surt
+cyclades	root	tslinux
+d-link	D-Link	D-Link
+d-link		admin
+d-link	admin	
+d-link		public
+d-link	user	
+d-link	admin	
+d-link	admin	
+d-link	admin	
+d-link	admin	
+d-link	admin	
+d-link	admin	admin
+d-link	admin	
+d-link		admin
+d-link	admin	
+d-link	admin	
+d-link	User	
+d-link	admin	admin
+d-link	admin	
+d-link	user	
+d-link	admin	
+d-link	admin	
+d-link	admin	admin
+d-link	admin	admin
+d-link	admin	admin
+d-link	admin	admin
+d-link	admin	
+d-link	admin	admin
+d-link		private
+d-link	admin	admin
+d-link	admin	
+d-link	admin	admin
+d-link	admin	admin
+d-link	admin	
+d-link	admin	admin
+d-link	admin	admin
+d-link	admin	
+d-link	user	
+d-link	admin	admin
+d-link	admin	
+d-link	Alphanetworks	wrgg15_di524
+d-link	admin	
+d-link	admin	admin
+d-link	admin	
+d9287ar	Clarissa	
+dallas-semiconductors	root	tini
+datacom		letmein
+datawizard.net	anonymous	any@
+davolink	user	user
+davox	root	davox
+davox	admin	admin
+davox	davox	davox
+davox	sa	
+deerfield	MDaemon	MServer
+dell	admin	password
+dell	root	calvin
+dell	Admin	
+dell	admin	
+dell	admin	admin
+demarc	admin	my_DEMARC
+deutsche-telekom		0
+deutsche-telekom	admin	
+deutsche-telekom		0
+deutsche-telekom		0
+develcon		BRIDGE
+develcon		password
+di624	admin	password
+dictaphone	PBX	PBX
+dictaphone	NETWORK	NETWORK
+dictaphone	NETOP	
+digicom	admin	michelangelo
+digicom	user	password
+digicom	Admin	
+digicom	root	admin
+digicorp		BRIDGE
+digicorp		password
+digicorp		BRIDGE
+digicorp		password
+dlink	admin	admin
+dlink	admin	admin
+dlink		admin
+draytek	admin	admin
+draytek	admin	
+draytek	admin	admin
+draytek	draytek	1234
+dynalink	admin	admin
+e-con	admin	epicrouter
+e-tech	admin	epicrouter
+e-tech		admin
+e-tech		admin
+edimax	admin	1234
+edimax	guest	
+edimax	admin	123
+edimax	admin	epicrouter
+edimax	admin	1234
+edimax	admin	password
+edimax	edimax	software01
+edimax	admin	 OR su@psir
+efficient		admin
+efficient	login	admin
+efficient	login	password
+efficient		admin
+efficient-networks		4getme2
+efficient-networks	login	admin
+efficient-networks		hs7mwxkk
+elsa		cisco
+emc	admin	
+enterasys	admin	netadmin
+enterasys		netadmin
+enterasys	admin	
+enterasys	tiger	tiger123
+entrust	websecadm	changeme
+ericsson	netman	netman
+ericsson		help
+ericsson		
+ericsson	netman	netman
+ericsson	MD110	help
+ericsson	admin	default
+ericsson	expert	expert
+ericsson-acc	public	
+everfocus	admin	admin
+everfocus	supervisor	supervisor
+everfocus	operator	operator
+exabyte	anonymous	Exabyte
+extended-systems	admin	extendnet
+extreme-networks	admin	
+f5	root	default
+f5-networks		
+flowpoint	admin	admin
+flowpoint		password
+flowpoint	admin	admin
+flowpoint	admin	admin
+flowpoint	admin	admin
+fon	admin	admin
+fortinet	admin	
+fortinet	maintainer	bcpb+serial#
+fortinet	maintainer	admin
+foundry-networks	admin	admin
+freetech		Posterie
+freetech		Posterie
+fujitsu-siemens		connect
+fujitsu-siemens	manage	!manage
+fujitsu-siemens	manage	!manage
+funk-software	admin	radius
+gericom	Administrator	
+giga	Administrator	admin
+grandstream	admin	1234
+greatspeed	netadmin	nimdaten
+guru	admin	admin
+gvc	Administrator	admin
+hewlett-packard	admin	admin
+hewlett-packard	MGR	HPP187
+hewlett-packard	MGR	HPP189
+hewlett-packard	MGR	HPP196
+hewlett-packard	MGR	INTX3
+hewlett-packard	MGR	ITF3000
+hewlett-packard	MGR	NETBASE
+hewlett-packard	MGR	REGO
+hewlett-packard	MGR	RJE
+hewlett-packard	MGR	CONV
+hewlett-packard	OPERATOR	SYS
+hewlett-packard	OPERATOR	DISC
+hewlett-packard	OPERATOR	SYSTEM
+hewlett-packard	OPERATOR	SUPPORT
+hewlett-packard	OPERATOR	COGNOS
+hewlett-packard	PCUSER	SYS
+hewlett-packard	RSBCMON	SYS
+hewlett-packard	SPOOLMAN	HPOFFICE
+hewlett-packard	WP	HPOFFICE
+hewlett-packard	ADVMAIL	HPOFFICE DATA
+hewlett-packard	ADVMAIL	HP
+hewlett-packard	FIELD	SUPPORT
+hewlett-packard	FIELD	MGR
+hewlett-packard	FIELD	SERVICE
+hewlett-packard	FIELD	MANAGER
+hewlett-packard	FIELD	HPP187 SYS
+hewlett-packard	FIELD	LOTUS
+hewlett-packard	FIELD	HPWORD PUB
+hewlett-packard	FIELD	HPONLY
+hewlett-packard	HELLO	MANAGER.SYS
+hewlett-packard	HELLO	MGR.SYS
+hewlett-packard	HELLO	FIELD.SUPPORT
+hewlett-packard	HELLO	OP.OPERATOR
+hewlett-packard	MAIL	MAIL
+hewlett-packard	MAIL	REMOTE
+hewlett-packard	MAIL	TELESUP
+hewlett-packard	MAIL	HPOFFICE
+hewlett-packard	MAIL	MPE
+hewlett-packard	MANAGER	TCH
+hewlett-packard	MANAGER	SYS
+hewlett-packard	MANAGER	SECURITY
+hewlett-packard	MANAGER	ITF3000
+hewlett-packard	MANAGER	HPOFFICE
+hewlett-packard	MANAGER	COGNOS
+hewlett-packard	MANAGER	TELESUP
+hewlett-packard	MGR	SYS
+hewlett-packard	MGR	CAROLIAN
+hewlett-packard	MGR	VESOFT
+hewlett-packard	MGR	XLSERVER
+hewlett-packard	MGR	SECURITY
+hewlett-packard	MGR	TELESUP
+hewlett-packard	MGR	HPDESK
+hewlett-packard	MGR	CCC
+hewlett-packard	MGR	CNAS
+hewlett-packard	MGR	WORD
+hewlett-packard	MGR	COGNOS
+hewlett-packard	MGR	ROBELLE
+hewlett-packard	MGR	HPOFFICE
+hewlett-packard	MGR	HPONLY
+hewlett-packard		
+hewlett-packard		
+hewlett-packard	Anonymous	
+hewlett-packard		
+hewlett-packard	admin	hp.com
+hp	admin	admin
+hp	admin	
+hp	admin	isee
+hp	admin	admin
+hp	Factory	56789
+hp	Administrator	admin
+hp	root	password
+huawei	admin	admin
+huawei	TMAR#HWMT8007079	
+huawei	admin	admin
+huawei	admin	admin
+huawei-incorporate	admin	admin
+iblitzz	admin	admin
+ibm		ascend
+ibm		
+ibm		admin
+ibm		admin
+ibm	storwatch	specialist
+ibm		R1QTPS 
+ibm	vt100	public
+ibm	admin	password
+ibm	admin	
+ibm	superadmin	secret
+ibm	hscroot	abc123
+ibm	admin	secure
+ibm	root	
+ibm		admin
+ibm		
+ibm	USERID	PASSW0RD
+ibm	USERID	PASSW0RD
+ibm	Administrator	admin
+idirect	admin	P@55w0rd!
+idirect	root	iDirect
+ihoi	Administrator	pilou
+imai		
+inchon	admin	admin
+infacta	Administrator	
+infoblox	admin	
+infosmart	admin	0
+inova	iclock	timely
+integral-technologies	Administrator	letmein
+intel	root	
+intel	NICONEX	NICONEX
+intel	setup	setup
+intel	admin	
+intel		Intel
+intel	intel	intel
+intel	Guest	
+intel	root	
+intel/shiva	admin	hello
+intel/shiva	admin	hello
+interbase	SYSDBA	masterkey
+intermec	intermec	intermec
+intershop	operator	$chwarzepumpe
+intersystems	system	sys
+intex		
+intracom	admin	admin
+inventel	admin	admin
+ion		admin
+ion	Administrator	admin
+ipstar	admin	operator
+ipstar	admin	operator
+irongate	admin	NetSurvibox
+ironport	admin	ironport
+jaht	admin	epicrouter
+jd-edwards	JDE	JDE
+jde	PRODDTA	PRODDTA
+jds-microprocessing	hydrasna	
+juniper	netscreen	netscreen
+juniper	serial#	serial#
+kalatel		3477
+kalatel		8111
+kasda	admin	adslroot
+konica-minolta		1234
+konica-minolta		
+konica-minolta	admin	administrator
+konica-minolta		sysAdmin
+konica-minolta		sysAdmin
+konica/-minolta		0
+kti	superuser	123456
+kti	admin	123456
+kti	admin	123
+kyocera		PASSWORD
+kyocera	root	root
+kyocera	admin	admin
+kyocera		admin00
+kyocera	-	admin00
+kyocera-printers-		admin00
+lancom		
+lanier	admin	
+lanier	supervisor	
+lantronics		access
+lantronics		system
+lantronix		lantronix
+lantronix	sysadmin	PASS
+lantronix	login	access
+lantronix		admin
+lantronix		admin
+lantronix		access
+lantronix		
+lantronix		
+lantronix		
+lantronix		
+latis-network		
+laxo	admin	admin
+leviton	admin	leviton
+lg		jannie
+lg	admin	epicrouter
+linksys		
+linksys		admin
+linksys	Administrator	admin
+linksys		admin
+linksys	admin	
+linksys		admin
+linksys	admin	admin
+linksys	admin	admin
+linksys		
+linksys		admin
+linksys		admin
+linksys		admin
+linksys		admin
+linksys	admin	admin
+linksys	comcast	1234
+linksys	admin	admin
+linksys	admin	
+linksys	admin	admin
+linksys	admin	admin
+linksys	admin	admin
+linksys	admin	admin
+linksys		admin
+linksys	root	orion99
+linksys/-cisco	admin	admin
+linksys/-cisco	user	tivonpw
+livingston	!root	
+livingston	!root	
+livingston	!root	
+livingstone	root	
+lockdown-networks	setup	changeme(exclamation)
+logilink	admin	1234
+logitech		0
+longshine	admin	0
+lucent	xxx	cascade
+lucent		cascade
+lucent		cascade
+lucent	xxx	cascade
+lucent		cascade
+lucent		cascade
+lucent	admin	Ascend
+lucent	root	ascend
+lucent	readwrite	lucenttech1
+lucent	readonly	lucenttech2
+lucent	LUCENT01	UI-PSWD-01
+lucent	LUCENT02	UI-PSWD-02
+lucent	Administrator	
+lucent	admin	AitbISP4eCiG
+lucent	super	super
+lucent	bciim	bciimpw
+lucent	bcim	bcimpw
+lucent	bcms	bcmspw
+lucent	bcnas	bcnaspw
+lucent	blue	bluepw
+lucent	browse	browsepw
+lucent	browse	looker
+lucent	craft	craft
+lucent	craft	craftpw
+lucent	cust	custpw
+lucent	enquiry	enquirypw
+lucent	field	support
+lucent	inads	indspw
+lucent	inads	inads
+lucent	init	initpw
+lucent	locate	locatepw
+lucent	maint	maintpw
+lucent	maint	rwmaint
+lucent	nms	nmspw
+lucent	rcust	rcustpw
+lucent	support	supportpw
+lucent	tech	field
+lucent		admin
+m0n0wall	admin	mono
+m0n0wall	admin	mono
+marconi	ami	
+maxdata		
+maxdata		
+mcafee	scmadmin	scmchangeme
+mcdata	Administrator	password
+mcdata	McdataSE	redips
+mediatrix	administrator	
+mediatrix-2102	admin	1234
+medion		medion
+megastar		star
+mentec	MICRO	RSX
+mentec	MICRO	RSX
+mercury	Administrator	admin
+mercury	Administrator	admin
+meridian	service	smile
+micronet	root	default
+micronet	mac	
+micronet	admin	epicrouter
+microplex	root	root
+microrouter		letmein
+mikrotik	admin	
+mikrotik	admin	
+mikrotik	admin	
+milan	root	root
+minolta-pagrpro		sysadm
+minolta-qms	operator	
+minolta-qms	admin	
+mintel		SYSTEM
+mintel		SYSTEM
+mitel	system	password
+mitel		
+motorola	cablecom	router
+motorola	admin	motorola
+motorola	admin	motorola
+motorola	admin	motorola
+motorola	cablecom	router
+motorola	admin	motorola
+motorola	admin	motorola
+motorola-		
+mro-software	SYSADM	sysadm
+mutare-software		admin
+nai	admin	admin123
+nai	GlobalAdmin	GlobalAdmin
+nec		
+netcomm	admin	password
+netgea	admin	password
+netgear		1234
+netgear	admin	1234
+netgear	admin	admin
+netgear	admin	password
+netgear		1234
+netgear	super	5777364
+netgear	superman	21241036
+netgear	super	5777364
+netgear	admin	password
+netgear	admin	password
+netgear	admin	password
+netgear		
+netgear	admin	password
+netgear	admin	password
+netgear		private
+netgear	admin	password
+netgear	admin	1234
+netgear	admin	password
+netgear	admin	password
+netgear	admin	1234
+netgear	admin	
+netgear	admin	password
+netgear	admin	password
+netgear		admin
+netgear		password
+netgear	comcast	1234
+netgear	admin	password
+netgear	cusadmin	highspeed
+netgear	admin	password
+netgear	admin	Password
+netgear	admin	password
+netgear	admin	1234
+netgear	Gearguy	Geardog
+netgear	admin	password
+netgear		admin
+netgear	admin	
+netgear	admin	draadloos
+netgear	admin	password
+netgear	admin	netgear1
+netgear	admin	infrant1
+netgear	admin	password
+netgear	admin	password
+netgenesis	naadmin	naadmin
+netopia	netopia	netopia
+netopia	admin	
+netopia		
+netopia	admin	noway
+netopia		
+netopia	netopia	netopia
+netport	setup	setup
+netscreen	netscreen	netscreen
+netscreen	Administrator	
+netscreen	admin	
+netscreen	operator	
+netscreen	Administrator	
+netstar	admin	password
+network-appliance	admin	NetCache
+network-associates	e500	e500changeme
+network-associates	e250	e250changeme
+network-everywhere		admin
+ngsec	admin	
+ngsec	admin	asd
+niksun	vcr	NetVCR
+nimble		xdfk9874t3
+nimble		xdfk9874t3
+nokia	m1122	m1122
+nokia	telecom	telecom
+nokia		9999
+nokia		nokai
+nokia		nokia
+nokia		Telecom
+nomadix	admin	
+nortel	disttech	4tas
+nortel	maint	maint
+nortel	mlusr	mlusr
+nortel	admin	root
+nortel	l2	l2
+nortel	l3	l3
+nortel	ro	ro
+nortel	rw	rw
+nortel	rwa	rwa
+nortel	admin	setup
+nortel		secure
+nortel	login	0
+nortel	login	1111
+nortel	login	8429
+nortel	spcl	0
+nortel	service	smile
+nortel	root	3ep5w2u
+nortel		0
+nortel	maint	ntacdmax
+nortel	service	smile
+nortel	disttech	4tas
+nortel	maint	maint
+nortel	ccrusr	ccrusr
+nortel		
+nortel	service	smile
+nortel	admin	setup
+nortel		
+nortel	supervisor	PlsChgMe
+nortel		266344
+nortel	266344	266344
+nortel		
+nortel	admin	admin
+nortel	Manager	
+nrg-or-ricoh		password
+nullsoft	admin	changeme
+oki	root	Last 6 MAC
+oki	admin	OkiLAN
+olitec	admin	adslolitec
+olitec-(trendchip)	admin	admin
+omnitronix		SUPER
+omnitronix		SMDR
+omron		
+open-networks	root	0P3N
+openconnect	admin	OCS
+openconnect	adminstat	OCS
+openconnect	adminview	OCS
+openconnect	adminuser	OCS
+openconnect	adminview	OCS
+openconnect	helpdesk	OCS
+openwave	sys	uplink
+openwave	cac_admin	cacadmin
+oracle	system/manager	sys/change_on_install
+osicom	Manager	Manager
+osicom	sysadm	sysadm
+osicom	write	private
+osicom	d.e.b.u.g	User
+osicom	echo	User
+osicom	guest	User
+osicom	Manager	Admin
+osicom	sysadm	Admin
+osicom	write	private
+osicom	sysadm	sysadm
+osicom	sysadm	sysadm
+osicom	sysadm	sysadm
+osicom	sysadm	sysadm
+osicom	sysadm	sysadm
+osicom	1500	and 2000 Series
+overland	Factory	56789
+ovislink	root	
+pacific-micro-data	pmd	
+panasonic		
+panasonic		
+panasonic		
+panasonic		1234
+pansonic	admin	1234
+penril-datability		system
+pentagram	admin	password
+pentaoffice		pento
+pentasafe	PSEAdmin	$secure$
+perle	admin	superuser
+pfsense	admin	pfsense
+phoenix-v1.14	Administrator	admin
+pirelli	admin	mu
+pirelli	admin	microbusiness
+pirelli	user	password
+pirelli	admin	smallbusiness
+pirelli	admin	microbusiness
+pirelli	user	password
+pirelli	admin	admin
+planet		default
+planet	admin	admin
+planet	admin	epicrouter
+planet	admin	1234
+planet	admin	epicrouter
+planet	admin	admin
+planet	admin	admin
+planex	admin	0
+polycom	Polycom	SpIp
+polycom		admin
+polycom		
+polycom	Polycom	456
+prestigio		
+prolink	admin	password
+promise	engmode	hawk201
+proxim		
+psion-teklogix	support	h179350
+psionteklogix	admin	admin
+psionteklogix	admin	admin
+ptcl	admin	admin
+pyramid-computer	admin	admin
+qlogic	admin	password
+qlogic	images	images
+quintum-technologies-inc.	admin	admin
+radware	lp	lp
+radware	radware	radware
+radware	radware	radware
+radware	radware	radware
+raidzone		raidzone
+ramp-networks	wradmin	trancell
+ramp-networks	wradmin	trancell
+redhat	piranha	q
+redhat	piranha	piranha
+research		Col2ogro2
+research		Col2ogro2
+ricoh	sysadmin	password
+ricoh	sysadmin	password
+ricoh		password
+ricoh		password
+ricoh	admin	
+ricoh	admin	password
+ricoh	admin	
+ricoh		sysadm
+ricoh		sysadm
+ricoh		sysadm
+ricoh		sysadm
+ricoh		password
+rm	setup	changeme
+rm	teacher	password
+rm	temp1	password
+rm	admin	rmnetlm
+rm	admin2	changeme
+rm	adminstrator	changeme
+rm	deskalt	password
+rm	deskman	changeme
+rm	desknorm	password
+rm	deskres	password
+rm	guest	
+rm	replicator	replicator
+rm	RMUser1	password
+rm	topicalt	password
+rm	topicnorm	password
+rm	topicres	password
+roamabout	admin	password
+saf-tehnika	integrator	p1nacate
+saf-tehnika	administrator	d1scovery
+saf-tehnika	operator	col1ma
+saf-tehnika	monitor	monitor
+sagem	root	1234
+sagem	admin	epicrouter
+sagem	root	1234
+sagem	admin	admin
+sagem	Menara	Menara
+samsung		
+samsung	public	public
+samsung	admin	password
+scientific-atlanta	admin	w2402
+secure-computing	admin	
+sempre	admin	admin
+senao	admin	
+seninleyimben	admin	admin
+sercom	admin	admin
+sercom	admin	admin
+server-technology	GEN1	gen1
+server-technology	GEN2	gen2
+server-technology	ADMN	admn
+sharp		
+sharp	admin	Sharp
+sharp	Administrator	admin
+sharp	admin	Sharp
+sharp	admin	Sharp
+sharp	admin	admin
+sharp	admin	Sharp
+sharp	admin	Sharp
+shoretel	admin	changeme
+siemen	admin	
+siemens	eng	engineer
+siemens	op	op
+siemens	op	operator
+siemens		
+siemens	su	super
+siemens	poll	tech
+siemens	sysadmin	sysadmin
+siemens	admin	pwp
+siemens	tech	tech
+siemens	admin	
+siemens	superuser	admin
+siemens	poll	tech
+siemens	sysadmin	sysadmin
+siemens	tech	tech
+siemens	admin	pwp
+siemens	eng	engineer
+siemens	op	op
+siemens	op	operator
+siemens	su	super
+siemens	admin	hagpolm1
+siemens	admin	admin
+siemens		admin
+siemens	31994	31994
+siemens		0
+siemens-nixdorf		SKY_FOX
+siemens-nixdorf		SKY_FOX
+siemens-pro-c5		
+sigma	admin	admin
+signamax	admin	admin
+siips	Administrator	ganteng
+silex-technology	root	
+silvercrest	admin	admin
+sitara	root	
+sitecom		sitecom
+sitecom	admin	admin
+smartswitch	admin	
+smc	admin	
+smc	admin	admin
+smc	admin	admin
+smc		smcadmin
+smc		smcadmin
+smc	Administrator	smcadmin
+smc	admin	barricade
+smc	smc	smcadmin
+smc	admin	smcadmin
+smc		smcadmin
+smc	admin	barricade
+smc		smcadmin
+smc	cusadmin	highspeed
+smc	smc	smcadmin
+smc		smcadmin
+smc		smcadmin
+smc		smcadmin
+smc		smcadmin
+smc		smcadmin
+smc	mso	w0rkplac3rul3s
+snapgear	1.79	Multi
+solution-6	aaa	often blank
+sonic-x	root	admin
+sonicwall	admin	password
+sophia-(schweiz)-ag	admin	Protector
+sophia-(schweiz)-ag	root	root
+sorenson		admin
+sparklan	admin	admin
+spectra-logic	administrator	
+spectra-logic	operator	
+speedstream	admin	admin
+speedstream	admin	admin
+speedstream	admin	admin
+speedstream	admin	admin
+speedstream		admin
+speedstream		adminttd
+Speedstream-5200	Administrator	admin
+speedxess		speedxess
+sphairon	admin	passwort
+spike	enable	
+ssa	SSA	SSA
+stratacom	stratacom	stratauser
+sun	admin	admin
+sun	admin	admin
+sun-microsystems	root	changeme
+sweex	sweex	mysweex
+swissvoice	target	password
+syabas-technology	nmt	1234
+syabas-technology	nmt	1234
+syabas-technology	ftpuser	1234
+sybase	jagadmin	
+symbol		Symbol
+symbol		Symbol
+symbol		Symbol
+symbol		Symbol
+symbol		Symbol
+symbol		Symbol
+symbol	admin	symbol
+symmetricom	operator	mercury
+symmetricom	guest	truetime
+sysmaster	admin	12345
+system/32	install	secret
+t-com	veda	12871
+t-com		0
+t-com		0
+t-com		0
+t-com		0
+t-com		123456
+t-comfort	Administrator	
+tandberg		TANDBERG
+tandberg	Admin	
+tandberg-data		10023
+tandem	super.super	
+tandem	super.super	master
+team-xodus	xbox	xbox
+teklogix	Administrator	
+telco-systems	telco	telco
+telecom	operator	
+teledat	admin	1234
+teletronics	admin	1234
+telewell	admin	password
+telewell	admin	admin
+telindus		
+telindus	admin	admin
+telindus	admin	admin
+tellabs	tellabs	tellabs#1
+tellabs	root	admin_1
+terayon		
+terayon		
+thomson		admin
+thomson		admin
+thomson		admin
+thomson	admin	password
+tiara	tiara	tiaranet
+topcom	admin	admin
+topcom	admin	admin
+topcom	admin	admin
+topcom	admin	admin
+topsec	superman	talent
+toshiba	Admin	123456
+toshiba	admin	123456
+toshiba	admin	123456
+trendmicro	admin	imss7.0
+trendnet	admin	password
+troy	admin	extendnet
+tvt-system	craft	
+tvt-system		enter
+u.s.-robotics	root	12345
+u.s.-robotics	admin	admin
+unex		password
+unisys	NAU	NAU
+unisys	ADMINISTRATOR	ADMINISTRATOR
+unisys	HTTP	HTTP
+us-robotic-	support	support
+us-robotics	root	admin
+us-robotics	Any	12345
+us-robotics		12345
+us-robotics	support	support
+us-robotics	admin	
+us-robotics	admin	admin
+us-robotics		admin
+us21100060		
+various	root	admin
+vasco	admin	
+verifone		166816
+verilink		
+visual-networks	admin	visual
+vxworks	admin	admin
+vxworks	guest	guest
+wanadoo	admin	admin
+wang	CSG	SESAME
+watch-guard	admin	
+watchguard	user	pass
+watchguard	(blank)	wg
+weidmüeller	admin	detmond
+westell	admin	password
+westell	admin	
+westell	admin	password
+westell	CSG	SESAME
+westell	admin	sysAdmin
+westell	admin	password1
+wlan_3d	Administrator	admin
+wline	admin	1234
+wyse	root	wyse
+wyse	VNC	winterm
+wyse		Fireport
+wyse	root	
+wyse	rapport	r@p8p0r+
+wyse		password
+x-micro	super	super
+x-micro	1502	1502
+x-micro	super	super
+xampp	newuser	wampp
+xavi		
+xavi		
+xd	xd	xd
+xerox	admin	2222
+xerox	admin	admin
+xerox	admin	admin
+xerox		admin
+xerox	admin	
+xerox	admin	1111
+xerox	admin	22222
+xerox	admin	admin
+xerox	admin	x-admin
+xerox	11111	x-admin
+xerox		0
+xerox	admin	x-admin
+xylan	admin	switch
+xylan	diag	switch
+xylan	admin	switch
+xyplex		system
+xyplex		access
+xyplex		system
+xyplex		access
+xyplex		
+xyplex		access
+xyplex		access
+xyplex		system
+yakumo	admin	admin
+zcom	root	admin
+zebra	admin	1234
+zoom	admin	zoomadsl
+zte	ADSL	expert03
+zyxel		1234
+zyxel	root	1234
+zyxel		1234
+zyxel		1234
+zyxel	admin	1234
+zyxel		1234
+zyxel		
+zyxel	admin	1234
+zyxel	1234	1234
+zyxel	webadmin	1234
+zyxel	admin	1234
+zyxel	admin	admin
+zyxel	admin	1234
+zyxel		1234
+zyxel	admin	
+zyxel	admin	1234
+zyxel		admin
+zyxel		1234
+zyxel		1234
+zyxel	admin	0
+zyxel-zywall		admin
