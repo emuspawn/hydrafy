@@ -1,5 +1,11 @@
-Current Version: 0.1
+Current Version: 0.3
 
 Changes:
+#0.3
+- Add version control to router.lst and spread.ods
+- Fixed router.lst to avoid unnecessary spaces which resulted in improper username/pass entry into hydra
+- Documented a bug with the -C flag for hydra, temporary use of -L and -P flags as a result of this bug till hydra is patched
+- Added in some case to replace if statements
+
 #0.1
 - Beta release
