@@ -1,6 +1,9 @@
-Current Version: 0.3
+Current Version: 0.5
 
 Changes:
+#0.5
+- Implemented sort and uniq filters for creation of user.txt and pass.txt.  This significantly lessened the advent of incorrect entries.  This is a temporary fix until a patch for Hydra with the -C flag is released
+
 #0.3
 - Add version control to router.lst and spread.ods
 - Fixed router.lst to avoid unnecessary spaces which resulted in improper username/pass entry into hydra

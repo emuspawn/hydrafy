@@ -3,7 +3,6 @@ function script_info--()
 {
 ##~~~~~~~~~~~~~~~~~~~~~~~~~ File and License Info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 ## Filename: hydrafy.sh
-## Version: 0.3
 ## Copyright (C) <2012>  <Snafu>
 
 ##  This program is free software: you can redistribute it and/or modify
@@ -61,7 +60,6 @@ function script_info--()
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ To Do ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-## Implement update feature
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 
@@ -71,11 +69,13 @@ function script_info--()
 
 ## Support for the Router Attack method is limited to browser-based http-get requests right now,
 ## Feel free to do the work for me, if your work is good....I'll implement it and give you credit
+
+## Currently implementing sort and uniq filtering on user.txt and pass.txt.  This significantly reduced the amount of wrong entries to the the usage of a user and a pass file versus the colon delimited combo method implemented via hydra -C which is currently broken.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~## 
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Bug Traq ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-## Hydra does not properly process a colon delimited file via the -C flag.  As an example use zyxel routers and watch the output of hydra, then compare against snakebite.txt.  This method has current been suspended until a patch for hydra is released.
+## Hydra does not properly process a colon delimited file via the -C flag.  As an example use zyxel routers and watch the output of hydra, then compare against snakebite.txt.  This method has currently been suspended until a patch for hydra is released.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 
@@ -86,7 +86,7 @@ function script_info--()
 
 ## @The_Eccentric for reigniting the spark to publish this script
 
-## Kudos to my wife for always standing by my side, having faith in me, and showing the greatest of patience for my obsession with hacking
+## Kudos to my wife for always standing by my side, having faith in me, and showing the greatest of patience for my obsession with hacking.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 sleep 0
 }
@@ -174,8 +174,8 @@ function hydrafy--()
 ip= ## Tgt address for hydra
 at= ## path for past root
 # grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt
-grep -i $ROUTER $FILE | awk -F\| '{ print $2 }' > user.txt
-grep -i $ROUTER $FILE | awk -F\| '{ print $3 }' > pass.txt
+grep -i $ROUTER $FILE | awk -F\| '{ print $2 }' | sort | uniq > user.txt
+grep -i $ROUTER $FILE | awk -F\| '{ print $3 }' | sort | uniq > pass.txt
 
 echo -e "\033[1;36m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -230,8 +230,8 @@ while getopts "f:r:" options; do
   esac
 done
 
-current_ver="0.3"
-rel_date="1 February 2012"
+current_ver="0.5"
+rel_date="2 February 2012"
 if [[ -n "$FILE" && -n "$ROUTER" ]]; then
 	menu--
 else
