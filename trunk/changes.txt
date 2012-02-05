@@ -1,6 +1,9 @@
-Current Version: 0.5
+Current Version: 0.6
 
 Changes:
+#0.6
+- The change for 0.5 has now been fixed and we are back to using -C flags.  Included in the repo is a patched up version of hydra.  Read the development notes in the comments of hydra.sh for more information
+
 #0.5
 - Implemented sort and uniq filters for creation of user.txt and pass.txt.  This significantly lessened the advent of incorrect entries.  This is a temporary fix until a patch for Hydra with the -C flag is released
 
