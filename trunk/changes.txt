@@ -1,6 +1,11 @@
-Current Version: 0.6
+Current Version: 1.0
 
 Changes:
+#1.0
+- Complete makeover of hydra.sh
+- Addition of a parsing function to specify which type of grep the user would like
+- The patched up version of hydra has been removed since there is now a public version of hydra v7.2 available at thc.org/thc-hydra
+
 #0.6
 - The change for 0.5 has now been fixed and we are back to using -C flags.  Included in the repo is a patched up version of hydra.  Read the development notes in the comments of hydra.sh for more information
 
