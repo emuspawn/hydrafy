@@ -1,6 +1,13 @@
-Current Version: 1.0
+Current Version: 1.2
 
 Changes:
+#1.2
+- Implementation of snakebite mode via oui.lst
+- Added the functionality to switch to previous menus or exit from the script via a command -versus- interrupts
+- Modification of GETOPTS functionality with respect to launching hydrafy.sh
+- Removal of leading and trailing spaces within awk statements
+- More comments were added to the script detailing which functions perform which actions
+
 #1.0
 - Complete makeover of hydra.sh
 - Addition of a parsing function to specify which type of grep the user would like

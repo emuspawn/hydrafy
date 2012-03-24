@@ -65,6 +65,26 @@ function script_info--()
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~ Development Notes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+## Steps to create the lists (router.lst && oui.lst)
+### Need to script the "line number" checks into a "for" statement for speed
+## router.lst
+## Copy each column into a new file (name, user, pass)
+## Remove the trailing blank line from each file
+## cat -n <file> | tail -n1 (to verify spaces properly done, they should match on the numbers!)
+## paste -d '|' name user pass > router.lst
+## rm name user pass
+## oui.lst
+## wget http://standards.ieee.org/develop/regauth/oui/oui.txt
+## grep hex oui.txt > mod-oui.txt
+## mv mod-oui.txt oui.txt
+## awk '{print $1}' oui.txt | sed 's/-/:/g' | tr [:upper:] [:lower:] > oui
+## awk '{$1="";$2="";print}' oui.txt | sed 's/^[\t]*  //' | sed 's/ /-/g' > oui-name
+## open oui and oui-name with kate, import into spreadsheet, sort by oui-name A-Z
+## close kate, and then overwrite oui and oui-name with the above
+## Remove the trailing blank line from each file
+## paste -d '|' oui-name oui > oui.lst
+## rm oui-name oui oui.txt
+
 ## After some serious thought and deliberation, I decided to make this a 3 choice script
 ## Display the user/pass combos, Save the user/pass combos, or just save and run hydra
 
@@ -76,6 +96,9 @@ function script_info--()
 ## There is now an option for -C -or- -L and -P with reference to methodology of attack
 
 ## router.lst has been parsed for duplicate values and I have removed as many of them as I could find.
+
+## On 24 March 2012, Snakebite mode was been implemented via the -s flag during launch.
+## I had intended this to be an automated form of attack via the venom that snakebite mode spits out, however the list from the IEEE is "skewed" at best with reference to the OUI company.  If I could ever get my hands on a nice list that somewhat resembles the names listed in router.lst, I will certainly script up some venom for an automated attack.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~## 
 
 
@@ -109,8 +132,11 @@ Version \033[1;33m$current_ver\033[1;34m (\033[1;33m$rel_date\033[1;34m)\033[1;3
 Read Comments Prior to Usage"
 echo -e "\033[1;32m
 Usage:
-./hydrafy -f <file to be parsed> -r <brand of router to parse for>
-"
+./hydrafy -s {\033[1;33mDisplay Router OUI Information\033[1;32m}
+
+-or-
+
+./hydrafy -f\033[1;34m <file to be parsed>\033[1;32m -r\033[1;34m <brand of router to parse for>\n"
 }
 
 parser--()
@@ -127,11 +153,16 @@ echo -e "\033[1;34m
 
 2) Starts with\033[1;32m             [grep -i ^<brand of router>]\033[36m
 
-3) Word match\033[1;32m             [grep -iwx <brand of router>]\033[1;34m
+3) Word match\033[1;32m             [grep -iwx <brand of router>]\033[36m
+
+E)xit Script\033[1;34m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 read p_value
 case $p_value in
 	1|2|3) menu--;;
+	
+	e|E) exit 0;; 
+	
 	*) echo -e "\033[31m\nYOU MUST MAKE A VALID SELECTION TO PROCEED"
 	sleep 1
 	parser--;;
@@ -139,6 +170,26 @@ esac
 }
 ##~~~~~~~~~~~~~~~~~~~~~~~~~ END Repitious Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN Main Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+snakebite--()
+{
+bite=$(route -en | grep UG | awk '{print $2}')
+if [[ -z $bite ]];then
+	clear
+	echo -e "\033[31m\n\nYou Are Not Connected to a Network that has a Router\n\n"
+	sleep 2
+	exit 1
+else
+	ping -c 1 -s 1 $bite > /dev/null
+	bite=$(arp -n $bite | grep $bite | awk '{print $3}' | cut -c1-8)
+	bite=$(grep $bite oui.lst | awk -F\| '{print $1}')
+	clear
+	echo -e "\033[1;33m\n\n$bite\033[1;34m is the most likely candidate for the router\n\n"
+	sleep 2
+	exit 0
+fi
+}
 
 function menu--()
 {
@@ -154,7 +205,11 @@ echo -e "\033[1;34m
 
 2) Save Usernames:Passwords to a file
 
-3) Implement Router Attack via Hydra\033[1;34m
+3) Implement Router Attack via Hydra
+
+P)revious Menu
+
+E)xit Script\033[1;34m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 read selection
 case $selection in
@@ -163,6 +218,10 @@ case $selection in
 	2) file_save--;;
 
 	3) hydrafy--;;
+
+	p|P) parser--;;
+
+	e|E) exit 0;;
 
 	*) echo -e "\033[31m\nYOU MUST MAKE A VALID SELECTION TO PROCEED"
 	sleep 1
@@ -176,11 +235,11 @@ clear
 echo -e "\033[1;34m
 --------------------------------------------------------\033[1;33m"
 case $p_value in
-	1) grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }';;
+	1) grep -i $ROUTER $FILE | awk -F\| '{print $2":"$3}';;
 
-	2) grep -i ^$ROUTER $FILE | awk -F\| '{ print $2":"$3 }';;
+	2) grep -i ^$ROUTER $FILE | awk -F\| '{print $2":"$3}';;
 
-	3) grep -iwx $ROUTER $FILE | awk -F\| '{ print $2":"$3 }';;
+	3) grep -iwx $ROUTER $FILE | awk -F\| '{print $2":"$3}';;
 esac
 
 echo -e "\033[1;34m--------------------------------------------------------\033[1;32m
@@ -199,11 +258,11 @@ while [ -z $SAVE ];do
 done
 
 case $p_value in
-	1) grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > $SAVE;;
+	1) grep -i $ROUTER $FILE | awk -F\| '{print $2":"$3}' > $SAVE;;
 
-	2) grep -i ^$ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > $SAVE;;
+	2) grep -i ^$ROUTER $FILE | awk -F\| '{print $2":"$3}' > $SAVE;;
 
-	3) grep -iwx $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > $SAVE;;
+	3) grep -iwx $ROUTER $FILE | awk -F\| '{print $2":"$3}' > $SAVE;;
 esac
 
 echo -e "\033[1;32m
@@ -228,28 +287,36 @@ while [ -z $style ];do
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\033[36m
 1) -C (recommended)\033[1;32m    [colon separated "login:pass" format]\033[31m (Recommended)\033[36m
 
-2) -L and -P\033[1;32m           [load logins from $FILE and load passwords from $FILE]\033[1;34m
+2) -L and -P\033[1;32m           [load logins from $FILE and load passwords from $FILE]\033[36m
+
+P)revious Menu
+
+E)xit Script\033[1;34m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	read style
 	case $style in
 		1) case $p_value in
-			1) grep -i $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt;;
+			1) grep -i $ROUTER $FILE | awk -F\| '{print $2":"$3}' > snakebite.txt;;
 
-			2) grep -i ^$ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt;;
+			2) grep -i ^$ROUTER $FILE | awk -F\| '{print $2":"$3}' > snakebite.txt;;
 
-			3) grep -iwx $ROUTER $FILE | awk -F\| '{ print $2":"$3 }' > snakebite.txt;;
+			3) grep -iwx $ROUTER $FILE | awk -F\| '{print $2":"$3}' > snakebite.txt;;
 		esac;;
 
 		2) case $p_value in
-			1) grep -i $ROUTER $FILE | awk -F\| '{ print $2 }' | sort | uniq > user.txt
-			grep -i $ROUTER $FILE | awk -F\| '{ print $3 }' | sort | uniq > pass.txt;;
+			1) grep -i $ROUTER $FILE | awk -F\| '{print $2}' | sort | uniq > user.txt
+			grep -i $ROUTER $FILE | awk -F\| '{print $3}' | sort | uniq > pass.txt;;
 
-			2) grep -i ^$ROUTER $FILE | awk -F\| '{ print $2 }' | sort | uniq > user.txt
-			grep -i ^$ROUTER $FILE | awk -F\| '{ print $3 }' | sort | uniq > pass.txt;;
+			2) grep -i ^$ROUTER $FILE | awk -F\| '{print $2}' | sort | uniq > user.txt
+			grep -i ^$ROUTER $FILE | awk -F\| '{print $3}' | sort | uniq > pass.txt;;
 
-			3) grep -iwx $ROUTER $FILE | awk -F\| '{ print $2 }' | sort | uniq > user.txt
-			grep -iwx $ROUTER $FILE | awk -F\| '{ print $3 }' | sort | uniq > pass.txt;;
+			3) grep -iwx $ROUTER $FILE | awk -F\| '{print $2}' | sort | uniq > user.txt
+			grep -iwx $ROUTER $FILE | awk -F\| '{print $3}' | sort | uniq > pass.txt;;
 		esac;;
+
+		p|P) menu--;;
+
+		e|E) exit 0;;
 
 		*) echo -e "\033[31m\nYOU MUST MAKE A SELECTION TO PROCEED"
 		sleep 1 
@@ -306,20 +373,29 @@ case $extend in
 
 esac
 }
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~ END Main Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
-while getopts "f:r:" options; do
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN Launch Conditions ~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+current_ver="1.2"
+rel_date="24 March 2012"
+while getopts ":f:r:s" options; do
   case $options in
     f) FILE=$OPTARG;;
-    r) ROUTER=$OPTARG;;
-    *) usage--;;
 
+    r) ROUTER=$OPTARG;;
+
+	s) snakebite--;;
+
+	:) echo "Option -$OPTARG requires an argument."
+	exit 1;;
   esac
+
 done
 
-current_ver="1.0"
-rel_date="9 February 2012"
 if [[ -n "$FILE" && -n "$ROUTER" ]]; then
 	parser--
 else
 	usage--
 fi
+# ##~~~~~~~~~~~~~~~~~~~~~~~~~ END Launch Conditions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
