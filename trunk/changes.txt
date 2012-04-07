@@ -1,6 +1,10 @@
-Current Version: 1.2
+#1.4
+- Implemented a variable system for easier coding with respect to ANSI output
+- Changed all variables to lowercase except for those which require capitalization.
+- Renamed some of the variables within the script
+- Modification of $OPTARG condition.
+- Implementation of rtr_check--()
 
-Changes:
 #1.2
 - Implementation of snakebite mode via oui.lst
 - Added the functionality to switch to previous menus or exit from the script via a command -versus- interrupts
