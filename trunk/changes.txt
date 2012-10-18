@@ -44,3 +44,7 @@
 - Minor menu wording changes
 - Added a release date for tracking purposes within changes.txt
 - Reverted changes.txt to have the most recent changes on the bottom
+
+#1.6 (17 October 2012)
+- Added sudo to hydrafy.desktop allowing the route command to be called (N900 issue)
+- The check function to verify the existence of hydra in the user's path is now fully vetted and functional.

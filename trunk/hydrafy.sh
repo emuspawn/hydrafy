@@ -116,6 +116,8 @@ script_info--()
 
 ## Deviney for some of the ideas in atk_mth--(), the ideas behind protocol--() and list_protocol--()
 
+## foremost on the #maemo (freenode) for making me check into sudo...evidently route aint in the path, and ya gotz to sudo....  Thank buddy.
+
 ## Kudos to my wife for always standing by my side, having faith in me, and showing the greatest of patience for my obsession with hacking
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 sleep 0
@@ -216,8 +218,16 @@ case $var in
 	1) parent="1"
 	parser--;;
 
-	2) parent="2"
-	parser--;;
+	2) 
+	which hydra > /dev/null 2>&1
+	if [[ $? -ne 0 ]];then
+		echo -e "$WRN\nYou Must Have Hydra in Your Path to Continue"
+		sleep 1.5
+		main_menu--
+	else
+		parent="2"
+		parser--
+	fi;;
 
 	r|R) declare--;;
 
@@ -540,18 +550,9 @@ HDR="\033[1;34m" ## Headers
 INP="\033[36m"   ## Inputs
 }
 
-current_ver="1.5"
-rel_date="3 October 2012"
+current_ver="1.6"
+rel_date="17 October 2012"
 envir--
-
-### Interesting results via osso-xterm here....  Will play with later, just want to publish for now.
-# which hydra
-# if [[ $? -ne 0 ]];then
-# 	echo -e "$WRN\nYOU MUST HAVE HYDRA IN YOUR PATH FOR HYDRAFY TO WORK"
-# 	read
-# 	reset
-# 	exit 1
-# fi
 
 if [[ -n $1 ]]; then
 	usage--
