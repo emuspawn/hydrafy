@@ -1,3 +1,4 @@
+Changes List ~~~~> hydrafy.sh
 #0.1
 - Beta release
 
@@ -48,3 +49,9 @@
 #1.6 (17 October 2012)
 - Added sudo to hydrafy.desktop allowing the route command to be called (N900 issue)
 - The check function to verify the existence of hydra in the user's path is now fully vetted and functional.
+
+#1.8 (12 November 2012)
+- Changed input readability with regards to the "read" command
+- Added router OUI checking capabilities {detailed in the Development Notes section}
+- Added the ability to update the OUI list via IEEE
+- Fixed usage--() to direct the user to type ./hydrafy.sh vs ./hydrafy

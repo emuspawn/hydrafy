@@ -59,28 +59,13 @@ script_info--()
 
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~ Development Notes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-## Steps to create the lists (router.lst && oui.lst)
-### Need to script the "line number" checks into a "for" statement for speed
-
-## router.lst
+## Creation of router.lst
+## Open spread.ods
 ## Copy each column into a new file (name, user, pass)
 ## Remove the trailing blank line from each file
 ## cat -n <file> | tail -n1 (to verify spaces properly done, they should match on the numbers!)
 ## paste -d '|' name user pass > router.lst
 ## rm name user pass
-
-## oui.lst
-## wget http://standards.ieee.org/develop/regauth/oui/oui.txt
-## grep hex oui.txt > mod-oui.txt
-## mv mod-oui.txt oui.txt
-## awk '{print $1}' oui.txt | sed 's/-/:/g' | tr [:upper:] [:lower:] > oui
-## awk '{$1="";$2="";print}' oui.txt | sed 's/^[\t]*  //' | sed 's/ /-/g' > oui-name
-## open oui and oui-name with kate, import into spreadsheet, sort by oui-name A-Z
-## close kate, and then overwrite oui and oui-name with the above
-## Remove the trailing blank line from each file
-## paste -d '|' oui-name oui > oui.lst
-## rm oui-name oui oui.txt
-
 
 ## There is now an option for -C -or- -L and -P with reference to methodology of attack
 
@@ -98,6 +83,12 @@ script_info--()
 	## /usr/bin/hydrafy.sh
 	## /usr/share/applications/hildon/hydrafy.desktop
 	## /home/user/MyDocs/pwnphone/hydrafy
+
+## On 6 November 2012, a function to parse against the OUI of the currently connected router (if it existed) was added.
+## This will add a great deal of speed to the functionality of hydrafy.
+## Warning to the user on this:  The IEEE list is "skewed" at best, so ensure that you take the time to think about what you type in for parsing purposes once hydrafy asks you, typing it in exactly as the output shows for the above function is "dicey" at best...
+
+## Updating of the OUI list has been added in as functionality
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~## 
 
 
@@ -114,9 +105,11 @@ script_info--()
 
 ## TAPE for making me look deper into regex and pointing out the 360+ duplicate usernames and passwords within router.lst
 
-## Deviney for some of the ideas in atk_mth--(), the ideas behind protocol--() and list_protocol--()
+## Deviney for some of the ideas in atk_mth--(), the ideas behind protocol--() and list_protocol--()s
 
 ## foremost on the #maemo (freenode) for making me check into sudo...evidently route aint in the path, and ya gotz to sudo....  Thank buddy.
+
+## JohnnyBom for having me explain some bash ninjitsu and stumblin upon an error in usage--()
 
 ## Kudos to my wife for always standing by my side, having faith in me, and showing the greatest of patience for my obsession with hacking
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
@@ -132,23 +125,23 @@ Version $OUT$current_ver$HDR (\033[1;33m$rel_date$HDR)$INS
 
 Read Comments Prior to Usage"
 echo -e "$HDR\nUsage:$INS\n
-./hydrafy$HDR
+./hydrafy.sh$HDR
 ****************************************\n"
 read
 }
 
 rtr_check--()
 {
-grep -i $rtr router.lst > /dev/null
+grep -i $rtr router.lst > /dev/null 2>&1
 if [[ $? -ne 0 ]];then
 	clear
-	echo -e "$OUT\n$rtr is not listed in router.lst.
+	echo -e "$OUT\n$rtr$INS is not listed in router.lst.
 $INS
 If $OUT$rtr$INS was not a misspell, please contribute to the hydrafy project
   by submitting any known information regarding the $OUT$rtr$INS series of routers
   (i.e.$OUT Usernames, Passwords, Spelling Variations, OUI Listings, etc$INS) to:$OUT\n
    will@configitnow.com
-  $INS Subj Line:$OUT hydra\n"
+  $INS Subj Line:$OUT hydrafy\n"
 	read
 	exit 0
 else
@@ -186,7 +179,19 @@ fi
 declare--()
 {
 clear
-echo -e "$INP\nWhat is the Brand of Router?\n"
+if [[ -n $oui ]];then
+	echo -e "$INP\nWould You Like to Update the OUI list? (y/n)"
+	read var
+	clear
+	case $var in
+		y|Y) update_oui--;;
+	esac
+
+	clear
+	echo -e "$INS\nCurrently connected to a $OUT`grep $oui oui.lst | cut -d\| -f2`"
+fi
+
+echo -e "$INP\nWhat is the Brand of Router you would like to Parse/Attack?\n"
 read rtr
 if [[ -z $rtr ]];then
 	echo -e "$WRN You Must Declare the Brand to Continue"
@@ -194,6 +199,25 @@ if [[ -z $rtr ]];then
 	exit 1
 else
 	rtr_check--
+fi
+}
+
+update_oui--()
+{
+echo -e "$OUT"
+wget http://standards.ieee.org/develop/regauth/oui/oui.txt -O tmp.lst -T 10 -t 1
+if [[ $? -ne 0 ]];then
+	echo -e "$WRN\nUnable to Grab List From standards.ieee.org"
+	rm -rf tmp.lst > /dev/null 2>&1
+	sleep .7
+else
+	grep hex tmp.lst > mod-oui
+	awk '{print $1}' mod-oui | sed 's/-/:/g' | tr [:upper:] [:lower:] > oui
+	awk '{$1="";$2="";print}' mod-oui | sed 's/^[\t]*  //' | sed 's/ /-/g' > oui-name
+	paste -d '|' oui oui-name > oui.lst
+	rm -rf oui-name oui mod-oui tmp.lst
+	echo -e "$OUT\n\nOUI List Successfully Updated!"
+	sleep 1.5
 fi
 }
 
@@ -211,8 +235,8 @@ echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 R)edeclare Router Brand
 
-E)xit HydraFy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+E)xit HydraFy$HDR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n$INP"
 read var
 case $var in
 	1) parent="1"
@@ -257,7 +281,7 @@ echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 P)revious Menu
 
 E)xit HydraFy\033[1;34m
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n$INP"
 read p_value
 case $p_value in
 	1|2|3) case $parent in
@@ -293,7 +317,7 @@ echo -e "$HDR\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 P)revious Menu
 
 E)xit HydraFy$HDR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n$INP"
 read selection
 case $selection in
 	1) display--;;
@@ -400,7 +424,7 @@ while [ -z $style ];do
 P)revious Menu
 
 E)xit HydraFy$HDR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n$INP"
 	read style
 	case $style in
 		1) case $p_value in
@@ -469,7 +493,7 @@ C)ommence Attack
 P)revious Menu
 
 E)xit HydraFy$HDR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n$INP"
 	read selection
 
 	case $selection in
@@ -494,7 +518,7 @@ E)xit HydraFy$HDR
 			yes) pth="/"
 			pth_1= ## Nulled
 			while [ -z $pth_1 ];do
-				echo -e "$INP\nWhat is the path past root? $WRN{The / is pre-pended by default}"
+				echo -e "$INP\nWhat is the path past root? $WRN{The / is pre-pended by default}$INP"
 				read pth_1
 			done
 
@@ -504,7 +528,7 @@ E)xit HydraFy$HDR
 		3) clear 
 		protocol--;;
 
-		4) echo -e "$INP\nParallel Tasks? $WRN{1-128}"
+		4) echo -e "$INP\nParallel Tasks? $WRN{1-128}$INP"
 		read to
 		if [[ $tsk -lt 1 || $tsk -gt 128 ]];then
 			tsk=
@@ -550,13 +574,22 @@ HDR="\033[1;34m" ## Headers
 INP="\033[36m"   ## Inputs
 }
 
-current_ver="1.6"
-rel_date="17 October 2012"
+current_ver="1.8"
+rel_date="12 November 2012"
 envir--
 
 if [[ -n $1 ]]; then
 	usage--
 else
+	uname -m | cut -b-3 | grep arm > /dev/null 2>&1
+	if [[ $? -ne 0 ]];then
+		## Not an N900
+		oui=$(route | grep UG | awk '{print $2}' | xargs arp | tail -n1 | awk '{print $3}' | cut -d\: -f-3)
+	else
+		## N900
+		oui=$(route | grep UG | awk '{print $2}' | xargs arp | awk '{print $4}' | cut -d\: -f-3)
+	fi
+
 	declare--
 fi
-# ##~~~~~~~~~~~~~~~~~~~~~~~~~ END Launch Conditions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+##~~~~~~~~~~~~~~~~~~~~~~~~~ END Launch Conditions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
