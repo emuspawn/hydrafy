@@ -574,8 +574,8 @@ HDR="\033[1;34m" ## Headers
 INP="\033[36m"   ## Inputs
 }
 
-current_ver="1.8"
-rel_date="12 November 2012"
+current_ver="1.8.2"
+rel_date="24 November 2012"
 envir--
 
 if [[ -n $1 ]]; then

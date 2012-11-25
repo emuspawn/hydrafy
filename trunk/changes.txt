@@ -55,3 +55,7 @@ Changes List ~~~~> hydrafy.sh
 - Added router OUI checking capabilities {detailed in the Development Notes section}
 - Added the ability to update the OUI list via IEEE
 - Fixed usage--() to direct the user to type ./hydrafy.sh vs ./hydrafy
+
+#1.8.2 (24 November 2012)
+- Stripped N900 stuff from the main SVN repo in order to create a .deb for hydrafy for the N900
+
