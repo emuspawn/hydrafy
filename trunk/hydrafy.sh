@@ -574,8 +574,8 @@ HDR="\033[1;34m" ## Headers
 INP="\033[36m"   ## Inputs
 }
 
-current_ver="1.8.2"
-rel_date="24 November 2012"
+current_ver="1.8.8"
+rel_date="10 December 2012"
 envir--
 
 if [[ -n $1 ]]; then
@@ -584,10 +584,14 @@ else
 	uname -m | cut -b-3 | grep arm > /dev/null 2>&1
 	if [[ $? -ne 0 ]];then
 		## Not an N900
-		oui=$(route | grep UG | awk '{print $2}' | xargs arp | tail -n1 | awk '{print $3}' | cut -d\: -f-3)
+		router_ip=$(route | grep UG | awk '{print $2}')
+		ping $router_ip -c 1 -s 1 > /dev/null 2>&1
+		oui=$(arp $router_ip | tail -n1 | awk '{print $3}' | cut -d\: -f-3)
 	else
 		## N900
-		oui=$(route | grep UG | awk '{print $2}' | xargs arp | awk '{print $4}' | cut -d\: -f-3)
+		router_ip=$(route | grep UG | awk '{print $2}')
+                ping $router_ip -c 1 -s 1 > /dev/null 2>&1
+                oui=$(arp $router_ip | awk '{print $4}' | cut -d\: -f-3)
 	fi
 
 	declare--
