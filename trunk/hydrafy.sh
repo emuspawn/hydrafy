@@ -184,7 +184,9 @@ if [[ -n $oui ]];then
 	esac
 
 	clear
-	echo -e "$INS\nCurrently connected to a $OUT`grep $oui oui.csv | cut -d\| -f2`"
+	grep_result=$(grep $oui oui.csv | awk -F \, '{print $2 " "}')
+	grep_result_II="type of router."
+	echo -e "$INS\nCurrently connected to a $OUT$grep_result$INS$grep_result_II"
 fi
 
 echo -e "$INP\nWhat is the Brand of Router you would like to Parse/Attack?\n"
